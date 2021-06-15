@@ -13,7 +13,7 @@
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:text="This is fragment with tasks list"
+        android:text="This is fragment with tasks list"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
