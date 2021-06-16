@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MobileOrganizer</string>
+    <string name="date_create">Create: %1$s</string>
+    <string name="date_update">Update: %1$s</string>
 </resources>

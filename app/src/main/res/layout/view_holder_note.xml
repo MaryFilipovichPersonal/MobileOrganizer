@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vhn_card_view"
+    style="@style/RecyclerCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vhn_cl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/vhn_tv_note_title"
+            style="@style/RecyclerTVTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/vhn_tv_note_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Note Title" />
+
+        <TextView
+            android:id="@+id/vhn_tv_note_category"
+            style="@style/RecyclerTVCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Category" />
+
+        <TextView
+            android:id="@+id/vhn_tv_note_content"
+            style="@style/RecyclerTVContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vhn_tv_note_title"
+            tools:text="Note Description" />
+
+        <View
+            android:id="@+id/vhn_v_line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/silver"
+            app:layout_constraintTop_toBottomOf="@id/vhn_tv_note_content" />
+
+        <TextView
+            android:id="@+id/vhn_tv_note_create"
+            style="@style/RecyclerTVDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/date_create"
+            app:layout_constraintEnd_toStartOf="@id/vhn_guide_line1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vhn_v_line1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vhn_guide_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/vhn_tv_note_update"
+            style="@style/RecyclerTVDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/date_update"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vhn_guide_line1"
+            app:layout_constraintTop_toBottomOf="@id/vhn_v_line1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
