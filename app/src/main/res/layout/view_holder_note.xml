@@ -11,7 +11,7 @@
         android:id="@+id/vhn_cl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="8dp">
+        android:paddingBottom="4dp">
 
         <TextView
             android:id="@+id/vhn_tv_note_title"

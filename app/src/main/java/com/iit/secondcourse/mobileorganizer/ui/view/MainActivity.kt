@@ -1,4 +1,4 @@
-package com.iit.secondcourse.mobileorganizer
+package com.iit.secondcourse.mobileorganizer.ui.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -4,6 +4,7 @@ const val MAIN_ACTIVITY = "MainActivity"
 const val MAIN_FRAGMENT = "MainFragment"
 const val NOTES_LIST_FRAGMENT = "NotesListFragment"
 const val TASKS_LIST_FRAGMENT = "TasksListFragment"
+const val ADD_NOTE_FRAGMENT = "NoteAddDialogFragment"
 
 // database -------------------
 const val DATABASE_NAME = "mobile_organizer_database"
@@ -20,5 +21,9 @@ const val SUBTASK_TABLE_NAME = "note_table"
 const val CATEGORY_TABLE_NAME = "note_table"
 //-------------------------------
 
-val TAB_FRAGMENTS_TITLES = arrayListOf<String>("Заметки", "Задачи")
+//Bundle
+const val NOTE_ID = "note_id"
+//-------------------------------
+
+val TAB_FRAGMENTS_TITLES = arrayListOf("Заметки", "Задачи")
 

@@ -1,10 +1,10 @@
 package com.iit.secondcourse.mobileorganizer.data.entities
 
-import android.icu.util.Calendar
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.iit.secondcourse.mobileorganizer.utils.*
+import java.util.*
 
 @Entity(tableName = NOTE_TABLE_NAME)
 data class Note(
