@@ -9,14 +9,11 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.iit.secondcourse.mobileorganizer.databinding.FragmentMainBinding
-import com.iit.secondcourse.mobileorganizer.ui.view.addnote.NoteAddDialogFragment
 import com.iit.secondcourse.mobileorganizer.ui.view.main.utils.ViewPagerAdapter
-import com.iit.secondcourse.mobileorganizer.ui.view.noteslist.utils.OnAddNotesBtnClickListener
-import com.iit.secondcourse.mobileorganizer.utils.ADD_NOTE_FRAGMENT
 import com.iit.secondcourse.mobileorganizer.utils.MAIN_FRAGMENT
 import com.iit.secondcourse.mobileorganizer.utils.TAB_FRAGMENTS_TITLES
 
-class MainFragment : Fragment(), OnAddNotesBtnClickListener {
+class MainFragment : Fragment() {
 
     //view binding
     private var _binding: FragmentMainBinding? = null
@@ -39,7 +36,7 @@ class MainFragment : Fragment(), OnAddNotesBtnClickListener {
 
     private fun initTabs() {
 
-        binding.fmViewPager.adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
+        binding.fmViewPager.adapter = ViewPagerAdapter(requireActivity().supportFragmentManager, requireActivity().lifecycle)
 
         TabLayoutMediator(
             binding.mfTabLayout,
@@ -58,8 +55,4 @@ class MainFragment : Fragment(), OnAddNotesBtnClickListener {
         fun newInstance() = MainFragment()
     }
 
-    override fun onAddNoteBtnClick() {
-        Log.d(MAIN_FRAGMENT, "onAddNoteBtnClick")
-
-    }
 }

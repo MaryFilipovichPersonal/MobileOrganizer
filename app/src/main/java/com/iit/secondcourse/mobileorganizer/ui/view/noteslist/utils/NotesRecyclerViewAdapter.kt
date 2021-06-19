@@ -4,15 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.iit.secondcourse.mobileorganizer.R
 import com.iit.secondcourse.mobileorganizer.data.entities.Note
 import com.iit.secondcourse.mobileorganizer.utils.DateUtils
-import com.iit.secondcourse.mobileorganizer.utils.OnItemClickListener
+import com.iit.secondcourse.mobileorganizer.utils.OnRecyclerViewEventsListener
+import com.iit.secondcourse.mobileorganizer.utils.SwipeToDeleteCallback
 
-class NotesRecyclerViewAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<NoteViewHolder>() {
+class NotesRecyclerViewAdapter(private val listener: OnRecyclerViewEventsListener) :
+    RecyclerView.Adapter<NoteViewHolder>(), SwipeToDeleteCallback.ItemTouchHelperAdapter {
 
     private var notes: List<Note> = listOf()
 
@@ -34,10 +35,20 @@ class NotesRecyclerViewAdapter(private val listener: OnItemClickListener) : Recy
     override fun getItemCount() = notes.size
 
     fun submitList(newList: List<Note>) {
-        val diffUtilsCallback =  NotesDiffUtilsCallback(notes, newList)
-        val diffResult = DiffUtil.calculateDiff(diffUtilsCallback)
-        diffResult.dispatchUpdatesTo(this)
-        notes = newList
+        if (notes != newList) {
+            val diffUtilsCallback = NotesDiffUtilsCallback(notes, newList)
+            val diffResult = DiffUtil.calculateDiff(diffUtilsCallback)
+            diffResult.dispatchUpdatesTo(this)
+            notes = newList
+        } else {
+            notes = newList
+            notifyDataSetChanged()
+        }
+
+    }
+
+    override fun onRowSwiped(position: Int) {
+        listener.onItemSwiped(notes[position])
     }
 
 }
@@ -54,8 +65,10 @@ class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvNoteContent.text = context.getString(R.string.content, note.content)
         //TODO: add categories support
 //            tvCategory.text = String.format(R.string.category.toString(), note.category)
-        tvNoteDateCreate.text = context.getString(R.string.date_create, DateUtils.getFormattedDate(note.dateCreate))
-        tvNoteDateUpdate.text = context.getString(R.string.date_update, DateUtils.getFormattedDate(note.dateUpdate))
+        tvNoteDateCreate.text =
+            context.getString(R.string.date_create, DateUtils.getFormattedDate(note.dateCreate))
+        tvNoteDateUpdate.text =
+            context.getString(R.string.date_update, DateUtils.getFormattedDate(note.dateUpdate))
     }
 }
 

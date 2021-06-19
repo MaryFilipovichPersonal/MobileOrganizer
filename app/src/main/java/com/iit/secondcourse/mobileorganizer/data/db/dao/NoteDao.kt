@@ -12,7 +12,7 @@ interface NoteDao {
     fun getNotesInUpdateDateOrder(): Flow<List<Note>>
 
     @Query("SELECT * FROM $NOTE_TABLE_NAME WHERE id=:id")
-    fun getNoteById(id: Long): Note
+    suspend fun getNoteById(id: Long): Note
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertNote(note: Note)

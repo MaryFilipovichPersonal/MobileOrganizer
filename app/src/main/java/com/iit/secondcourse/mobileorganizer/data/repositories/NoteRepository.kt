@@ -1,5 +1,6 @@
 package com.iit.secondcourse.mobileorganizer.data.repositories
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.iit.secondcourse.mobileorganizer.data.db.dao.NoteDao
 import com.iit.secondcourse.mobileorganizer.data.entities.Note
@@ -12,6 +13,10 @@ class NoteRepository(private val noteDao: NoteDao) {
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
     val allNotes: Flow<List<Note>> = noteDao.getNotesInUpdateDateOrder()
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun getNoteById(id: Long) = noteDao.getNoteById(id)
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
@@ -31,6 +36,8 @@ class NoteRepository(private val noteDao: NoteDao) {
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun updateNote(note: Note){
+        Log.d("Repository", "updateNote(note = $note)")
         noteDao.updateNote(note)
     }
+
 }

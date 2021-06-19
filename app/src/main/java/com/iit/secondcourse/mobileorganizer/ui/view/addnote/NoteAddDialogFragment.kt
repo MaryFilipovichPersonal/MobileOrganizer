@@ -50,10 +50,6 @@ class NoteAddDialogFragment : BottomSheetDialogFragment() {
         }
 
         setListeners()
-
-//        arguments?.let {
-//            param1 = it.getLong(NOTE_ID)
-//        }
     }
 
     private fun setListeners() {
@@ -82,12 +78,6 @@ class NoteAddDialogFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
-        fun newInstance(/*id: Long*/): NoteAddDialogFragment =
-            NoteAddDialogFragment().apply {
-//                arguments = Bundle().apply {
-//                    putLong(NOTE_ID, id)
-//                }
-            }
-
+        fun newInstance() = NoteAddDialogFragment()
     }
 }
