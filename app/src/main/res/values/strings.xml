@@ -2,6 +2,8 @@
     <string name="app_name">MobileOrganizer</string>
     <string name="date_create">Create: %1$s</string>
     <string name="date_update">Update: %1$s</string>
+    <string name="date_start">Start: %1$s</string>
+    <string name="date_deadline">Deadline: %1$s</string>
     <string name="title">%1$s</string>
     <string name="content">%1$s</string>
     <string name="category">%1$s</string>

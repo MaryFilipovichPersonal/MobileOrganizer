@@ -54,11 +54,11 @@ class NotesRecyclerViewAdapter(private val listener: OnRecyclerViewEventsListene
 }
 
 class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var tvNoteTitle: TextView = itemView.findViewById(R.id.vhn_tv_note_title)
-    var tvNoteContent: TextView = itemView.findViewById(R.id.vhn_tv_note_content)
-    var tvNoteDateCreate: TextView = itemView.findViewById(R.id.vhn_tv_note_create)
-    var tvNoteDateUpdate: TextView = itemView.findViewById(R.id.vhn_tv_note_update)
-    var tvCategory: TextView = itemView.findViewById(R.id.vhn_tv_note_category)
+    private var tvNoteTitle: TextView = itemView.findViewById(R.id.vhn_tv_note_title)
+    private var tvNoteContent: TextView = itemView.findViewById(R.id.vhn_tv_note_content)
+    private var tvNoteDateCreate: TextView = itemView.findViewById(R.id.vhn_tv_note_create)
+    private var tvNoteDateUpdate: TextView = itemView.findViewById(R.id.vhn_tv_note_update)
+    private var tvCategory: TextView = itemView.findViewById(R.id.vhn_tv_note_category)
 
     fun bind(note: Note) {
         tvNoteTitle.text = context.getString(R.string.title, note.title)
@@ -66,9 +66,9 @@ class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //TODO: add categories support
 //            tvCategory.text = String.format(R.string.category.toString(), note.category)
         tvNoteDateCreate.text =
-            context.getString(R.string.date_create, DateUtils.getFormattedDate(note.dateCreate))
+            context.getString(R.string.date_create, DateUtils.getNoteFormattedDate(note.dateCreate))
         tvNoteDateUpdate.text =
-            context.getString(R.string.date_update, DateUtils.getFormattedDate(note.dateUpdate))
+            context.getString(R.string.date_update, DateUtils.getNoteFormattedDate(note.dateUpdate))
     }
 }
 

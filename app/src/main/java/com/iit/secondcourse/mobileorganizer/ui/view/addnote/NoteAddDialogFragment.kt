@@ -16,7 +16,6 @@ import com.iit.secondcourse.mobileorganizer.databinding.FragmentNoteAddDialogBin
 import com.iit.secondcourse.mobileorganizer.ui.presenter.note.NoteViewModel
 import com.iit.secondcourse.mobileorganizer.ui.presenter.note.NoteViewModelFactory
 import com.iit.secondcourse.mobileorganizer.ui.view.MainActivity
-import com.iit.secondcourse.mobileorganizer.utils.NOTE_ID
 import java.util.*
 
 class NoteAddDialogFragment : BottomSheetDialogFragment() {
@@ -27,7 +26,7 @@ class NoteAddDialogFragment : BottomSheetDialogFragment() {
 
     //view model
     private val noteViewModel: NoteViewModel by viewModels {
-        NoteViewModelFactory(((activity as MainActivity).application as MobileOrganizerApplication).repository)
+        NoteViewModelFactory(((activity as MainActivity).application as MobileOrganizerApplication).noteRepository)
     }
 
     override fun onCreateView(

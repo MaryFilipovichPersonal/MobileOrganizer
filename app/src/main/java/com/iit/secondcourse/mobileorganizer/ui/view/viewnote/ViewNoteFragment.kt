@@ -2,17 +2,14 @@ package com.iit.secondcourse.mobileorganizer.ui.view.viewnote
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.iit.secondcourse.mobileorganizer.MobileOrganizerApplication
-import com.iit.secondcourse.mobileorganizer.R
 import com.iit.secondcourse.mobileorganizer.data.entities.Note
 import com.iit.secondcourse.mobileorganizer.databinding.FragmentViewNoteBinding
 import com.iit.secondcourse.mobileorganizer.ui.presenter.note.NoteViewModel
@@ -29,7 +26,7 @@ class ViewNoteFragment : Fragment() {
 
     //view model
     private val noteViewModel: NoteViewModel by viewModels {
-        NoteViewModelFactory(((activity as MainActivity).application as MobileOrganizerApplication).repository)
+        NoteViewModelFactory(((activity as MainActivity).application as MobileOrganizerApplication).noteRepository)
     }
 
     //system back btn handling

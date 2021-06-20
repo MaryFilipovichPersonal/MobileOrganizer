@@ -36,7 +36,7 @@ class NotesListFragment : Fragment() {
 
     //view model
     private val noteViewModel: NoteViewModel by viewModels {
-        NoteViewModelFactory(((activity as MainActivity).application as MobileOrganizerApplication).repository)
+        NoteViewModelFactory(((activity as MainActivity).application as MobileOrganizerApplication).noteRepository)
     }
 
     //card listener

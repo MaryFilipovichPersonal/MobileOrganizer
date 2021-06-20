@@ -26,7 +26,7 @@ const val TASK_COMPLETED = "completed"
     //..................................
     // Subtask table ...................
 const val SUBTASK_TABLE_NAME = "subtask_table"
-const val SUBTASK_DATE_START = "task_id"
+const val TASK_ID = "task_id"
 const val SUBTASK_TITLE = "title"
 const val SUBTASK_DESCRIPTION = "description"
 const val SUBTASK_DATE_DEADLINE = "date_deadline"

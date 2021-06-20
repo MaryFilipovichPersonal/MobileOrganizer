@@ -7,19 +7,29 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.iit.secondcourse.mobileorganizer.data.db.dao.NoteDao
+import com.iit.secondcourse.mobileorganizer.data.db.dao.SubtaskDao
+import com.iit.secondcourse.mobileorganizer.data.db.dao.TaskDao
 import com.iit.secondcourse.mobileorganizer.data.db.utils.Converters
 import com.iit.secondcourse.mobileorganizer.data.entities.Note
+import com.iit.secondcourse.mobileorganizer.data.entities.Subtask
+import com.iit.secondcourse.mobileorganizer.data.entities.Task
 import com.iit.secondcourse.mobileorganizer.utils.DATABASE_NAME
 import com.iit.secondcourse.mobileorganizer.utils.TestDataProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = arrayOf(Note::class), version = 1, exportSchema = false)
+@Database(
+    entities = arrayOf(Note::class, Task::class, Subtask::class),
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(Converters::class)
 public abstract class MobileOrganizerDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
+    abstract fun taskDao(): TaskDao
+    abstract fun subtaskDao(): SubtaskDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
@@ -35,14 +45,26 @@ public abstract class MobileOrganizerDatabase : RoomDatabase() {
                 super.onCreate(db)
                 INSTANCE?.let { database ->
                     scope.launch {
-                        populateDatabase(database.noteDao())
+                        setTestNotes(database.noteDao())
+                        setTestTasks(database.taskDao(), database.subtaskDao())
                     }
                 }
             }
 
-            suspend fun populateDatabase(noteDao: NoteDao) {
+            suspend fun setTestNotes(noteDao: NoteDao) {
                 noteDao.deleteAllNotes()
                 noteDao.insertNotesList(TestDataProvider.getNotes())
+            }
+            suspend fun setTestTasks(taskDao: TaskDao, subtaskDao: SubtaskDao) {
+                subtaskDao.deleteAllSubtasks()
+                taskDao.deleteAllTasks()
+                val data = TestDataProvider.getTasks()
+                taskDao.insertTasks(data.map { it.task })
+                val subtasks = arrayListOf<Subtask>()
+                data.forEach {
+                    subtasks.addAll(it.subtasks)
+                }
+                subtaskDao.insertSubtasks(subtasks)
             }
         }
 

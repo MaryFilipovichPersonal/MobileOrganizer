@@ -6,7 +6,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object DateUtils {
-    fun getFormattedDate (calendar: Calendar): String {
+    fun getNoteFormattedDate (calendar: Calendar): String {
         return SimpleDateFormat("dd.MM.yyyy HH:mm").format(calendar.time).toString()
+    }
+    fun getTaskFormattedDate (calendar: Calendar): String {
+        return SimpleDateFormat("dd.MM.yyyy").format(calendar.time).toString()
     }
 }

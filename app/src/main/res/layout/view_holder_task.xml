@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vht_card_view"
+    style="@style/RecyclerCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vht_cl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:id="@+id/vht_tv_task_title"
+            style="@style/RecyclerTVTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/vht_tv_task_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Task Title" />
+
+        <TextView
+            android:id="@+id/vht_tv_task_category"
+            style="@style/RecyclerTVCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Category" />
+
+        <TextView
+            android:id="@+id/vht_tv_task_description"
+            style="@style/RecyclerTVContent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toStartOf="@id/vht_cpv_progress_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/vht_v_line1"
+            app:layout_constraintTop_toBottomOf="@id/vht_tv_task_title"
+            tools:text="Task Description" />
+
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/vht_cpv_progress_bar"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:cpv_autoTextSize="true"
+            app:cpv_barColor="@color/purple_500"
+            app:cpv_barWidth="8dp"
+            app:cpv_innerContourSize="0dp"
+            app:cpv_maxValue="100"
+            app:cpv_decimalFormat="0"
+            app:cpv_outerContourSize="0dp"
+            app:cpv_rimColor="@color/purple_200"
+            app:cpv_rimWidth="8dp"
+            app:cpv_seekMode="true"
+            app:cpv_showUnit="true"
+            app:cpv_spinColor="@color/purple_500"
+            app:cpv_textColor="@color/purple_700"
+            app:cpv_textScale="1"
+            app:cpv_unit="%"
+            app:cpv_unitColor="@color/purple_500"
+            app:cpv_unitPosition="right_top"
+            app:cpv_unitScale="1"
+            app:cpv_value="50"
+            app:layout_constraintBottom_toTopOf="@id/vht_v_line1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vht_tv_task_category" />
+
+        <View
+            android:id="@+id/vht_v_line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/silver"
+            app:layout_constraintTop_toBottomOf="@id/vht_cpv_progress_bar" />
+
+        <TextView
+            android:id="@+id/vht_tv_task_start"
+            style="@style/RecyclerTVDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/date_start"
+            app:layout_constraintEnd_toStartOf="@id/vht_guide_line1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vht_v_line1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vht_guide_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/vht_tv_task_deadline"
+            style="@style/RecyclerTVDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/date_deadline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vht_guide_line1"
+            app:layout_constraintTop_toBottomOf="@id/vht_v_line1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

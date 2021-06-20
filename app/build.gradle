@@ -70,4 +70,7 @@ dependencies {
     // Kotlin coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
+
+    // circle progress bar
+    implementation 'com.github.jakob-grabner:Circle-Progress-View:1.4'
 }
