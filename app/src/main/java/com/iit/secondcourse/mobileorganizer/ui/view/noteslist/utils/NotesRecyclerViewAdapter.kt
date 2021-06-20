@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iit.secondcourse.mobileorganizer.R
 import com.iit.secondcourse.mobileorganizer.data.entities.Note
 import com.iit.secondcourse.mobileorganizer.utils.DateUtils
-import com.iit.secondcourse.mobileorganizer.utils.OnRecyclerViewEventsListener
 import com.iit.secondcourse.mobileorganizer.utils.SwipeToDeleteCallback
 
-class NotesRecyclerViewAdapter(private val listener: OnRecyclerViewEventsListener) :
+class NotesRecyclerViewAdapter(private val listenerNote: OnNoteRecyclerViewEventsListener) :
     RecyclerView.Adapter<NoteViewHolder>(), SwipeToDeleteCallback.ItemTouchHelperAdapter {
 
     private var notes: List<Note> = listOf()
@@ -28,7 +27,7 @@ class NotesRecyclerViewAdapter(private val listener: OnRecyclerViewEventsListene
         val note = notes[position]
         holder.bind(note)
         holder.itemView.setOnClickListener {
-            listener.onItemClick(note.id)
+            listenerNote.onNoteItemClick(note.id)
         }
     }
 
@@ -48,7 +47,7 @@ class NotesRecyclerViewAdapter(private val listener: OnRecyclerViewEventsListene
     }
 
     override fun onRowSwiped(position: Int) {
-        listener.onItemSwiped(notes[position])
+        listenerNote.onNoteItemSwiped(notes[position])
     }
 
 }

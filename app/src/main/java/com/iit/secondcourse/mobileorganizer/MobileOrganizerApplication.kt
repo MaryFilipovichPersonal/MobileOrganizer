@@ -16,5 +16,5 @@ class MobileOrganizerApplication : Application() {
     // rather than when the application starts
     val database by lazy { MobileOrganizerDatabase.getDatabase(this, appScope) }
     val noteRepository by lazy { NoteRepository(database.noteDao()) }
-    val taskRepository by lazy { TaskRepository(database.taskDao(),database.subtaskDao()) }
+    val taskRepository by lazy { TaskRepository(database.taskDao(),database.subtaskDao(), database.taskSubtaskDao()) }
 }

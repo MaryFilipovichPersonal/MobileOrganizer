@@ -9,6 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.iit.secondcourse.mobileorganizer.data.db.dao.NoteDao
 import com.iit.secondcourse.mobileorganizer.data.db.dao.SubtaskDao
 import com.iit.secondcourse.mobileorganizer.data.db.dao.TaskDao
+import com.iit.secondcourse.mobileorganizer.data.db.dao.TaskSubtaskDao
 import com.iit.secondcourse.mobileorganizer.data.db.utils.Converters
 import com.iit.secondcourse.mobileorganizer.data.entities.Note
 import com.iit.secondcourse.mobileorganizer.data.entities.Subtask
@@ -30,13 +31,13 @@ public abstract class MobileOrganizerDatabase : RoomDatabase() {
     abstract fun noteDao(): NoteDao
     abstract fun taskDao(): TaskDao
     abstract fun subtaskDao(): SubtaskDao
+    abstract fun taskSubtaskDao(): TaskSubtaskDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
         // same time.
         @Volatile
         private var INSTANCE: MobileOrganizerDatabase? = null
-
 
         private class MobileDatabaseCallback(
             private val scope: CoroutineScope
@@ -46,7 +47,7 @@ public abstract class MobileOrganizerDatabase : RoomDatabase() {
                 INSTANCE?.let { database ->
                     scope.launch {
                         setTestNotes(database.noteDao())
-                        setTestTasks(database.taskDao(), database.subtaskDao())
+                        setTestTasks(database.taskSubtaskDao())
                     }
                 }
             }
@@ -55,16 +56,12 @@ public abstract class MobileOrganizerDatabase : RoomDatabase() {
                 noteDao.deleteAllNotes()
                 noteDao.insertNotesList(TestDataProvider.getNotes())
             }
-            suspend fun setTestTasks(taskDao: TaskDao, subtaskDao: SubtaskDao) {
-                subtaskDao.deleteAllSubtasks()
-                taskDao.deleteAllTasks()
-                val data = TestDataProvider.getTasks()
-                taskDao.insertTasks(data.map { it.task })
-                val subtasks = arrayListOf<Subtask>()
-                data.forEach {
-                    subtasks.addAll(it.subtasks)
+            suspend fun setTestTasks(taskSubtaskDao: TaskSubtaskDao) {
+                taskSubtaskDao.deleteAllTasksSubtasks()
+                TestDataProvider.getTasks().forEach {
+                    taskSubtaskDao.insertTask(it)
                 }
-                subtaskDao.insertSubtasks(subtasks)
+
             }
         }
 

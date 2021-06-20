@@ -58,7 +58,6 @@
             app:cpv_outerContourSize="0dp"
             app:cpv_rimColor="@color/purple_200"
             app:cpv_rimWidth="8dp"
-            app:cpv_seekMode="true"
             app:cpv_showUnit="true"
             app:cpv_spinColor="@color/purple_500"
             app:cpv_textColor="@color/purple_700"

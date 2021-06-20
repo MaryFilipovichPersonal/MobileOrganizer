@@ -5,7 +5,6 @@ import androidx.room.Relation
 import com.iit.secondcourse.mobileorganizer.data.entities.Subtask
 import com.iit.secondcourse.mobileorganizer.data.entities.Task
 import com.iit.secondcourse.mobileorganizer.utils.TASK_ID
-import kotlinx.coroutines.flow.Flow
 
 data class TaskWithSubtasks(
     @Embedded val task: Task,

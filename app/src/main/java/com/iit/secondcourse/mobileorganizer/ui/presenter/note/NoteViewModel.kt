@@ -22,7 +22,6 @@ class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
     }
 
     fun updateNote(note: Note) = viewModelScope.launch {
-        Log.d("NoteViewModel", "updateNote(note = $note)")
         repository.updateNote(note)
         setUpdatingProcess(true)
     }

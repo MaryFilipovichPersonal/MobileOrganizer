@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 
-class SwipeToDeleteCallback(private val adapter: ItemTouchHelperAdapter) :
+class SwipeToDeleteCallback(private val adapter: ItemTouchHelperAdapter, private val direction: Int) :
     ItemTouchHelper.Callback() {
     override fun isLongPressDragEnabled() = false
 
@@ -24,7 +24,7 @@ class SwipeToDeleteCallback(private val adapter: ItemTouchHelperAdapter) :
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
     ): Int {
-        val swipeFlags = ItemTouchHelper.END //or ItemTouchHelper.START
+        val swipeFlags =  direction
         return makeMovementFlags(0, swipeFlags)
     }
 

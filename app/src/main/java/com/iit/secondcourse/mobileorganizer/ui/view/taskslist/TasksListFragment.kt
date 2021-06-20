@@ -1,5 +1,6 @@
 package com.iit.secondcourse.mobileorganizer.ui.view.taskslist
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.iit.secondcourse.mobileorganizer.MobileOrganizerApplication
-import com.iit.secondcourse.mobileorganizer.data.db.MobileOrganizerDatabase
+import com.iit.secondcourse.mobileorganizer.R
+import com.iit.secondcourse.mobileorganizer.data.db.utils.TaskWithSubtasks
 import com.iit.secondcourse.mobileorganizer.data.entities.Note
 import com.iit.secondcourse.mobileorganizer.databinding.FragmentTasksListBinding
 import com.iit.secondcourse.mobileorganizer.ui.presenter.task.TaskViewModel
@@ -16,7 +19,9 @@ import com.iit.secondcourse.mobileorganizer.ui.presenter.task.TaskViewModelFacto
 import com.iit.secondcourse.mobileorganizer.ui.view.MainActivity
 import com.iit.secondcourse.mobileorganizer.ui.view.taskslist.utils.TasksRecyclerViewAdapter
 import com.iit.secondcourse.mobileorganizer.utils.NOTES_LIST_FRAGMENT
-import com.iit.secondcourse.mobileorganizer.utils.OnRecyclerViewEventsListener
+import com.iit.secondcourse.mobileorganizer.ui.view.noteslist.utils.OnNoteRecyclerViewEventsListener
+import com.iit.secondcourse.mobileorganizer.ui.view.taskslist.utils.OnTaskRecyclerViewEventsListener
+import com.iit.secondcourse.mobileorganizer.utils.SwipeToDeleteCallback
 import com.iit.secondcourse.mobileorganizer.utils.TASKS_LIST_FRAGMENT
 
 class TasksListFragment : Fragment() {
@@ -33,12 +38,13 @@ class TasksListFragment : Fragment() {
     }
 
     //card listener
-    private val itemClickListener = object : OnRecyclerViewEventsListener {
-        override fun onItemClick(id: Long) {
-            Log.d(NOTES_LIST_FRAGMENT, "OnCardClick")
+    private val itemClickListener = object : OnTaskRecyclerViewEventsListener {
+        override fun onTaskItemClick(id: Long) {
+
         }
 
-        override fun onItemSwiped(note: Note) {
+        override fun onTaskItemSwiped(task: TaskWithSubtasks) {
+            showDeleteDialog(task)
         }
     }
 
@@ -48,7 +54,7 @@ class TasksListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTasksListBinding.inflate(inflater, container, false)
-        return  binding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,9 +66,32 @@ class TasksListFragment : Fragment() {
         setTasksObservers()
     }
 
+
+    private fun showDeleteDialog(task: TaskWithSubtasks) {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.apply {
+            setIcon(R.drawable.ic_round_delete_24)
+            setTitle("Warning")
+            setMessage("Are you sure in deleting the task?")
+            setPositiveButton("Delete") {_, _ ->
+                taskViewModel.deleteTask(task)
+            }
+            setNegativeButton("Cancel") {_, _ ->
+                taskViewModel.getTasks()?.let { adapter.submitList(it) }
+            }
+            setOnCancelListener {
+                taskViewModel.getTasks()?.let { adapter.submitList(it) }
+            }
+        }.create().show()
+    }
+
     private fun setRecyclerViewAdapter() {
         adapter = TasksRecyclerViewAdapter(itemClickListener)
         binding.ftlRvTasksList.adapter = adapter
+        taskViewModel.getTasks()?.let { adapter.submitList(it) }
+        val callback: ItemTouchHelper.Callback = SwipeToDeleteCallback(adapter, ItemTouchHelper.START)
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.ftlRvTasksList)
     }
 
     private fun setListeners() {
@@ -72,7 +101,7 @@ class TasksListFragment : Fragment() {
     private fun setTasksObservers() {
         taskViewModel.allTasks.observe(viewLifecycleOwner, { tasks ->
             Log.d(TASKS_LIST_FRAGMENT, "allTasks.observe: tasks = $tasks")
-            tasks?.let{ adapter.submitList(it) }
+            tasks?.let { adapter.submitList(it) }
         })
     }
 

@@ -14,13 +14,13 @@ class TasksDiffUtilsCallback(
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldItem = oldList[oldItemPosition]
-        val newItem = newList[oldItemPosition]
+        val newItem = newList[newItemPosition]
         return oldItem.task.id == newItem.task.id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldItem = oldList[oldItemPosition]
-        val newItem = newList[oldItemPosition]
+        val newItem = newList[newItemPosition]
         return oldItem == newItem
     }
 
