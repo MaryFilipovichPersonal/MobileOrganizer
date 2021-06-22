@@ -9,7 +9,7 @@ import com.iit.secondcourse.mobileorganizer.data.entities.Task
 abstract class TaskSubtaskDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun insertTask(task: Task)
+    abstract suspend fun insertTask(task: Task): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract suspend fun insertTasks(tasks: List<Task>)
@@ -20,10 +20,18 @@ abstract class TaskSubtaskDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract suspend fun insertSubtasks(subtasks: List<Subtask>)
 
+    @Query("SELECT id FROM task_table WHERE rowId = :rowId")
+    abstract suspend fun getTaskId(rowId: Long): Long
+
     @Transaction
-    open suspend fun insertTask(task: TaskWithSubtasks){
-        insertTask(task.task)
-        insertSubtasks(task.subtasks)
+    open suspend fun insertTaskWithSubtasks(task: Task, subtasks: List<Subtask>){
+        val rowId: Long = insertTask(task)
+        val id: Long = getTaskId(rowId)
+        val dbSubtasks = arrayListOf<Subtask>()
+        subtasks.forEach {
+            dbSubtasks.add(Subtask(id, it.title, it.description, it.isCompleted))
+        }
+        insertSubtasks(dbSubtasks)
     }
 
     @Update

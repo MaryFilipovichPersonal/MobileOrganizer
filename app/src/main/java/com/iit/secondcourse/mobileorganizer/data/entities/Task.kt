@@ -11,8 +11,7 @@ data class Task(
     @ColumnInfo(name = TASK_TITLE) val title: String,
     @ColumnInfo(name = TASK_DESCRIPTION) val description: String,
     @ColumnInfo(name = TASK_DATE_START) val dateStart: Calendar,
-    @ColumnInfo(name = TASK_DATE_DEADLINE) val dateDeadline: Calendar,
-    @ColumnInfo(name = TASK_COMPLETED) val isCompleted: Boolean
+    @ColumnInfo(name = TASK_DATE_DEADLINE) val dateDeadline: Calendar
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L

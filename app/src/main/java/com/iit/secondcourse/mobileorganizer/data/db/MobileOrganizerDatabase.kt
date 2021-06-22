@@ -59,7 +59,7 @@ public abstract class MobileOrganizerDatabase : RoomDatabase() {
             suspend fun setTestTasks(taskSubtaskDao: TaskSubtaskDao) {
                 taskSubtaskDao.deleteAllTasksSubtasks()
                 TestDataProvider.getTasks().forEach {
-                    taskSubtaskDao.insertTask(it)
+                    taskSubtaskDao.insertTaskWithSubtasks(it.task, it.subtasks)
                 }
 
             }

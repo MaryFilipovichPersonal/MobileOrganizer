@@ -1,6 +1,5 @@
 package com.iit.secondcourse.mobileorganizer.ui.view.taskslist.utils
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import at.grabner.circleprogress.CircleProgressView
 import com.iit.secondcourse.mobileorganizer.R
 import com.iit.secondcourse.mobileorganizer.data.db.utils.TaskWithSubtasks
 import com.iit.secondcourse.mobileorganizer.utils.DateUtils
-import com.iit.secondcourse.mobileorganizer.ui.view.noteslist.utils.OnNoteRecyclerViewEventsListener
 import com.iit.secondcourse.mobileorganizer.utils.SwipeToDeleteCallback
 
 class TasksRecyclerViewAdapter(private val listener: OnTaskRecyclerViewEventsListener) :
@@ -37,10 +35,6 @@ class TasksRecyclerViewAdapter(private val listener: OnTaskRecyclerViewEventsLis
     override fun getItemCount() = tasksWithSubtasks.size
 
     fun submitList(newList: List<TaskWithSubtasks>) {
-        Log.d(
-            "TasksRecyclerViewAdapter",
-            "submitList(..): newList submited. oldList = $tasksWithSubtasks"
-        )
         if (tasksWithSubtasks != newList) {
             val diffUtilsCallback = TasksDiffUtilsCallback(tasksWithSubtasks, newList)
             val diffResult = DiffUtil.calculateDiff(diffUtilsCallback)

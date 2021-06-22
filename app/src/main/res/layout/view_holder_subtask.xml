@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -26,14 +26,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/vhs_check_box_complete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/vhs_check_box_complete"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/vhs_v_line"
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:background="@color/silver"
             app:layout_constraintEnd_toEndOf="@id/vhs_tv_subtask_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vhs_tv_subtask_title" />
@@ -44,8 +45,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/vhs_check_box_complete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/vhs_check_box_complete"
             app:layout_constraintTop_toBottomOf="@id/vhs_v_line"
             app:layout_constraintBottom_toBottomOf="parent"/>
 

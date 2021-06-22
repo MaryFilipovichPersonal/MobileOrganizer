@@ -1,6 +1,7 @@
 package com.iit.secondcourse.mobileorganizer.ui.view.taskslist
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,15 +13,13 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.iit.secondcourse.mobileorganizer.MobileOrganizerApplication
 import com.iit.secondcourse.mobileorganizer.R
 import com.iit.secondcourse.mobileorganizer.data.db.utils.TaskWithSubtasks
-import com.iit.secondcourse.mobileorganizer.data.entities.Note
 import com.iit.secondcourse.mobileorganizer.databinding.FragmentTasksListBinding
 import com.iit.secondcourse.mobileorganizer.ui.presenter.task.TaskViewModel
 import com.iit.secondcourse.mobileorganizer.ui.presenter.task.TaskViewModelFactory
 import com.iit.secondcourse.mobileorganizer.ui.view.MainActivity
 import com.iit.secondcourse.mobileorganizer.ui.view.taskslist.utils.TasksRecyclerViewAdapter
-import com.iit.secondcourse.mobileorganizer.utils.NOTES_LIST_FRAGMENT
-import com.iit.secondcourse.mobileorganizer.ui.view.noteslist.utils.OnNoteRecyclerViewEventsListener
 import com.iit.secondcourse.mobileorganizer.ui.view.taskslist.utils.OnTaskRecyclerViewEventsListener
+import com.iit.secondcourse.mobileorganizer.ui.view.taskslist.utils.OnTasksListFragmentEventListener
 import com.iit.secondcourse.mobileorganizer.utils.SwipeToDeleteCallback
 import com.iit.secondcourse.mobileorganizer.utils.TASKS_LIST_FRAGMENT
 
@@ -48,6 +47,8 @@ class TasksListFragment : Fragment() {
         }
     }
 
+    private var addTaskBtnClickListener: OnTasksListFragmentEventListener? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,6 +67,16 @@ class TasksListFragment : Fragment() {
         setTasksObservers()
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnTasksListFragmentEventListener)
+            addTaskBtnClickListener = context
+    }
+
+    override fun onDetach() {
+        addTaskBtnClickListener = null
+        super.onDetach()
+    }
 
     private fun showDeleteDialog(task: TaskWithSubtasks) {
         val dialog = AlertDialog.Builder(requireContext())
@@ -95,7 +106,9 @@ class TasksListFragment : Fragment() {
     }
 
     private fun setListeners() {
-
+        binding.ftlBtnAddTask.setOnClickListener {
+            addTaskBtnClickListener?.onAddTaskBtnClick()
+        }
     }
 
     private fun setTasksObservers() {

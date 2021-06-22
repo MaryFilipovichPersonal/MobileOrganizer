@@ -5,6 +5,7 @@ import com.iit.secondcourse.mobileorganizer.data.db.dao.SubtaskDao
 import com.iit.secondcourse.mobileorganizer.data.db.dao.TaskDao
 import com.iit.secondcourse.mobileorganizer.data.db.dao.TaskSubtaskDao
 import com.iit.secondcourse.mobileorganizer.data.db.utils.TaskWithSubtasks
+import com.iit.secondcourse.mobileorganizer.data.entities.Subtask
 import com.iit.secondcourse.mobileorganizer.data.entities.Task
 import kotlinx.coroutines.flow.Flow
 
@@ -18,8 +19,8 @@ class TaskRepository(private val taskDao: TaskDao, private val subtaskDao: Subta
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertTask(task: TaskWithSubtasks) {
-        taskSubtaskDao.insertTask(task)
+    suspend fun insertTask(task: Task, subtasks: List<Subtask>) {
+        taskSubtaskDao.insertTaskWithSubtasks(task, subtasks)
     }
 
     @Suppress("RedundantSuspendModifier")

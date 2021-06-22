@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/fta_btn_add_task"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/fta_et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_rounded_bg"
+                android:hint="Title"
+                android:textColorHint="@color/silver"
+                android:textSize="28sp"
+                android:textColor="@color/dark_gray"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="textMultiLine"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/fta_et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColorHint="@color/silver"
+                android:background="@drawable/white_rounded_bg"
+                android:textColor="@color/dark_gray"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="textMultiLine"
+                android:hint="Description"
+                app:layout_constraintTop_toBottomOf="@id/fta_et_title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fta_tv_date_start"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/white_rounded_bg"
+                android:padding="4dp"
+                android:text="Start: not chosen"
+                android:textColor="@color/dark_gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@id/fta_guide_line1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fta_et_content" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/fta_guide_line1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fta_tv_date_deadline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/white_rounded_bg"
+                android:padding="4dp"
+                android:text="Deadline: not chosen"
+                android:textColor="@color/dark_gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fta_guide_line1"
+                app:layout_constraintTop_toBottomOf="@id/fta_et_content" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fta_tv_subtasks_title"
+                style="@style/RecyclerTVContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_rounded_bg"
+                android:gravity="center|top"
+                android:paddingTop="8dp"
+                android:paddingBottom="24dp"
+                android:text="Subtasks"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/fta_tv_date_deadline" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fta_btn_add_subtask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/ic_add_24"
+                app:fabSize="mini"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fta_tv_date_deadline" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fta_rv_subtasks_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/fta_tv_subtasks_title"
+                tools:listitem="@layout/view_holder_subtask" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fta_btn_add_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,7 @@ object TestDataProvider {
 
     fun getTasks(): List<TaskWithSubtasks> = arrayListOf(
         TaskWithSubtasks(
-            Task("Task 1", "some content", Calendar.getInstance(), Calendar.getInstance(), false),
+            Task("Task 1", "some content", Calendar.getInstance(), Calendar.getInstance()),
             arrayListOf(
                 Subtask(1L, "Subtask 1", "some content", true),
                 Subtask(1L, "Subtask 2", "some content", true),
@@ -30,7 +30,7 @@ object TestDataProvider {
             )
         ),
         TaskWithSubtasks(
-            Task("Task 2", "some content", Calendar.getInstance(), Calendar.getInstance(), false),
+            Task("Task 2", "some content", Calendar.getInstance(), Calendar.getInstance()),
             arrayListOf(
                 Subtask(2L, "Subtask 1", "some content", true),
                 Subtask(2L, "Subtask 2", "some content", true),
@@ -40,7 +40,7 @@ object TestDataProvider {
             )
         ),
         TaskWithSubtasks(
-            Task("Task 3", "some content", Calendar.getInstance(), Calendar.getInstance(), false),
+            Task("Task 3", "some content", Calendar.getInstance(), Calendar.getInstance()),
             arrayListOf(
                 Subtask(3L, "Subtask 1", "some content", false),
                 Subtask(3L, "Subtask 2", "some content", true),
@@ -48,7 +48,7 @@ object TestDataProvider {
             )
         ),
         TaskWithSubtasks(
-            Task("Task 4", "some content", Calendar.getInstance(), Calendar.getInstance(), false),
+            Task("Task 4", "some content", Calendar.getInstance(), Calendar.getInstance()),
             arrayListOf(
                 Subtask(4L, "Subtask 1", "some content", false),
                 Subtask(4L, "Subtask 2", "some content", false),
@@ -59,7 +59,7 @@ object TestDataProvider {
             )
         ),
         TaskWithSubtasks(
-            Task("Task 5", "some content", Calendar.getInstance(), Calendar.getInstance(), true),
+            Task("Task 5", "some content", Calendar.getInstance(), Calendar.getInstance()),
             arrayListOf(
                 Subtask(5L, "Subtask 1", "some content", true),
                 Subtask(5L, "Subtask 2", "some content", true),
@@ -67,7 +67,7 @@ object TestDataProvider {
             )
         ),
         TaskWithSubtasks(
-            Task("Task 6", "some content", Calendar.getInstance(), Calendar.getInstance(), false),
+            Task("Task 6", "some content", Calendar.getInstance(), Calendar.getInstance()),
             arrayListOf(
                 Subtask(6L, "Subtask 1", "some content", false),
                 Subtask(6L, "Subtask 2", "some content", true)
