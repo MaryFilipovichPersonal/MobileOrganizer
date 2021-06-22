@@ -167,7 +167,6 @@ class TaskAddFragment : Fragment() {
                     dateDeadline,
                     adapter.getSubtasks()
                 )
-                requireActivity().supportFragmentManager.popBackStack()
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -181,6 +180,10 @@ class TaskAddFragment : Fragment() {
     private fun checkDates() = (isDateStartSet && isDateDeadlineSet)
 
     private fun setTaskObservers() {
+        taskViewModel.isInserted.observe(viewLifecycleOwner) {
+            if (it)
+                requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     companion object {

@@ -13,6 +13,9 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
 
     val allTasks: LiveData<List<TaskWithSubtasks>> = repository.allTasks.asLiveData()
 
+    private val _isInserted = MutableLiveData(false)
+    val isInserted: LiveData<Boolean> get() = _isInserted
+
     fun getTasks() = allTasks.value
 
     fun insertTask(title: String, content: String, dateStart: Calendar, dateDeadline:Calendar, subtasks: List<Subtask>) = viewModelScope.launch {
@@ -23,6 +26,7 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
             dateDeadline
         )
         repository.insertTask(task, subtasks)
+        _isInserted.value = true
     }
 
     fun deleteTask(task: TaskWithSubtasks) = viewModelScope.launch {

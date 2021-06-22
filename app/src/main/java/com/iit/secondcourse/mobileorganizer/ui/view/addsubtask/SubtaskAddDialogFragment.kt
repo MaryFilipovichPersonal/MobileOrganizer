@@ -65,7 +65,7 @@ class SubtaskAddDialogFragment : BottomSheetDialogFragment() {
                 val title =
                     if (fsadEditTitle.text.isNullOrEmpty() || fsadEditTitle.text.isNullOrBlank()) "Untitled" else fsadEditTitle.text.toString()
                 val content =
-                    if (fsadEditContent.text.isNullOrEmpty() || fsadEditContent.text.isNullOrBlank()) "" else fsadEditContent.text.toString()
+                    if (fsadEditContent.text.isNullOrEmpty() || fsadEditContent.text.isNullOrBlank()) " " else fsadEditContent.text.toString()
                 (requireActivity() as MainActivity).supportFragmentManager.setFragmentResult(
                     SUBTASK_REQUEST_KEY,
                     bundleOf(

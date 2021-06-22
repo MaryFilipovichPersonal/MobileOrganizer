@@ -1,5 +1,6 @@
 package com.iit.secondcourse.mobileorganizer.data.db.dao
 
+import android.util.Log
 import androidx.room.*
 import com.iit.secondcourse.mobileorganizer.data.db.utils.TaskWithSubtasks
 import com.iit.secondcourse.mobileorganizer.data.entities.Subtask
@@ -9,16 +10,16 @@ import com.iit.secondcourse.mobileorganizer.data.entities.Task
 abstract class TaskSubtaskDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun insertTask(task: Task): Long
+    abstract fun insertTask(task: Task): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract suspend fun insertTasks(tasks: List<Task>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun insertSubtask(subtask: Subtask)
+    abstract fun insertSubtask(subtask: Subtask)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun insertSubtasks(subtasks: List<Subtask>)
+    abstract fun insertSubtasks(subtasks: List<Subtask>)
 
     @Query("SELECT id FROM task_table WHERE rowId = :rowId")
     abstract suspend fun getTaskId(rowId: Long): Long
@@ -27,11 +28,10 @@ abstract class TaskSubtaskDao {
     open suspend fun insertTaskWithSubtasks(task: Task, subtasks: List<Subtask>){
         val rowId: Long = insertTask(task)
         val id: Long = getTaskId(rowId)
-        val dbSubtasks = arrayListOf<Subtask>()
+//        val dbSubtasks = arrayListOf<Subtask>()
         subtasks.forEach {
-            dbSubtasks.add(Subtask(id, it.title, it.description, it.isCompleted))
+            insertSubtask(Subtask(id, it.title, it.description, it.isCompleted))
         }
-        insertSubtasks(dbSubtasks)
     }
 
     @Update
